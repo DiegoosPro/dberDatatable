@@ -1,0 +1,87 @@
+<!-- Essential javascripts for application to work-->
+<script src="../Assets/js/functions_roles.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+<!-- The javascript plugin to display page loading on top-->
+<script src="js/plugins/pace.min.js"></script>
+
+
+<div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <div class="tile-body">
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered" id="tableRoles">
+              <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descripción</th>
+                    <th>P. Costo</th>
+                    <th>Marca</th>
+                    <th>Categoria</th>
+                    <th>Azúcar</th>
+                    <th>IVA</th>
+                    <th>Foto</th>
+                    <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tbody>
+                    <?php
+                    if ($datos != null) {
+                      foreach ($datos as $indice => $row) {
+                    ?>
+                        <tr>
+                          <th scope="row"><?php echo $row['pro_id']; ?></th>
+                          <td><?php echo $row['pro_descripcion']; ?></td>
+                          <td><?php echo $row['pro_precio_c']; ?></td>
+                          <td><?php echo $row['marca_descripcion']; ?></td>
+                          <td><?php echo $row['catego_descripcion']; ?></td>
+                          <td><?php
+                              switch ($row['pro_nivel_azucar']) {
+                                case 'M':
+                                  echo "Medio";
+                                  break;
+                                case 'B':
+                                  echo "Bajo";
+                                  break;
+                                case 'A':
+                                  echo "Alto";
+                                  break;
+                                case 'N':
+                                  echo "Ninguno";
+                                  break;
+                              }
+                
+                              ?>
+                
+                          </td>
+                          <td><?php
+                              if ($row['pro_aplica_iva'] == 1)
+                                echo "Si";
+                              else
+                                echo "No";
+                              ?>
+                          </td>
+                          <td>
+                            <img src="../imagenes/<?php echo $row['pro_imagen']; ?>" width="60" height="60">
+                          </td>
+                          <td>
+                            <a href="#" class="btn btn-sm btn-info">Ver</a>
+                            <a href="proeditar.php?pro_id=<?php echo $row['pro_id'];?>" type="button"  class="btn btn-sm btn-warning">Editar</a>
+                            <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+                          </td>
+                        </tr>
+                    <?php
+                      } //foreach
+                    } //if
+                    ?>
+                  </tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
